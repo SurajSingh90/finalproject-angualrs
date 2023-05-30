@@ -1,0 +1,22 @@
+  <div>
+        <label for="imageUpload">Upload Image:</label>
+        <button type="button" (click)="selectImage()">Select Image</button>
+    </div>
+
+
+selectImage() {
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'image/*';
+    fileInput.addEventListener('change', (event: any) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          this.myform.controls['image'].setValue(reader.result);
+        };
+      }
+    });
+    fileInput.click();
+  }
